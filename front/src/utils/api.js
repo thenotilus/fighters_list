@@ -13,3 +13,7 @@ export const getList = () => {
 export const updateList = (list) => {
   return api.post('/upload/json', { list }).then((res) => res.data);
 };
+
+export const addFighter = (fighter) => {
+  return api.post('/add', fighter).then((res) => res.data);
+};

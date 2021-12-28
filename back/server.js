@@ -18,15 +18,19 @@ app.use(cors());
 app.use(express.json());
 
 const fileName = './fightersList.json';
-const list = getFile(fileName);
+//const list = getFile(fileName);
 
 app.get('/api/list', (req, res) => {
+  const list = getFile(fileName);
+
   res.send(list);
 });
 
 // post route to add a new fighter to the list
 app.post('/api/add', (req, res) => {
   const { position } = req.body;
+  const list = getFile(fileName);
+
   const newFighter = {
     ...req.body,
     nickname: '',
@@ -41,6 +45,8 @@ app.post('/api/add', (req, res) => {
   };
   insertElement(list, position, newFighter);
   let sortedlist = updatePosition(list);
+  writeFile(fileName, sortedlist);
+
   res.send(sortedlist);
 });
 

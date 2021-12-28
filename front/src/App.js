@@ -15,14 +15,14 @@ function App() {
   return (
     <main className="font-bold text-center pt-5 w-full h-full bg-gray-900 text-white">
       <h1 className="mb-10 text-3xl leading-3">fighters_list</h1>
-      <div class="flex justify-between items-start">
+      <div className="flex justify-between items-start">
         <DraggableList
           data={list}
           renderItemContent={(item) => LessonCard(item)}
           setdata={setList}
         />
         <div className="w-[60%] h-[90vh]">
-          <Forms />
+          <Forms setList={setList} />
         </div>
       </div>
     </main>
