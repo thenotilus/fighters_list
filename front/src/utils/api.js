@@ -17,3 +17,7 @@ export const updateList = (list) => {
 export const addFighter = (fighter) => {
   return api.post('/add', fighter).then((res) => res.data);
 };
+
+export const updateFighter = (fighter, id) => {
+  return api.put(`/update/${id}`, fighter).then((res) => res.data);
+};

@@ -1,78 +1,40 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { addFighter, getList } from '../../utils/api';
+import AddForm from './AddFrom';
+import EditForm from './EditForm';
 
-const Forms = ({ setList }) => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-  const [result, setResult] = useState('');
-
-  const onSubmit = (data) => {
-    setResult(JSON.stringify(data));
-    addFighter(data).then((res) => {
-      //getList();
-      setList(res);
-    });
-  };
-
+const Forms = ({ setList, Switch, Route, Link, list }) => {
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-center h-full mx-52"
-    >
-      <input
-        {...register('name', { required: true })}
-        placeholder="First name"
-        className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
-      />
-      {errors.name?.type === 'required' && 'Name is required'}
+    <div className="h-full">
+      <nav className="mt-5">
+        <ul className="flex justify-evenly">
+          <li className="py-2 px-4 bg-green-600 rounded-md">
+            <Link to="/">Home</Link>
+          </li>
+          <li className="py-2 px-4 bg-green-600 rounded-md">
+            <Link to="/add">Ajouter</Link>
+          </li>
+          <li className="py-2 px-4 bg-blue-400 rounded-md">Telecharger JSON</li>
+          <li className="py-2 px-4 bg-blue-400 rounded-md">Telecharger CSV</li>
+        </ul>
+      </nav>
 
-      <input
-        {...register('image', { required: true })}
-        placeholder="Image url"
-        className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
-      />
-      {errors.image?.type === 'required' && 'Image URL is required'}
-
-      <input
-        {...register('sherdog', { required: true })}
-        placeholder="Sherdog url"
-        className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
-      />
-      {errors.sherdog?.type === 'required' && 'Sherdog URL is required'}
-
-      <input
-        {...register('position', { required: true })}
-        placeholder="position"
-        type="number"
-        className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
-      />
-      {errors.position?.type === 'required' && 'Position URL is required'}
-
-      <input
-        {...register('ufc_position')}
-        placeholder="ufc position"
-        type="number"
-        className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
-      />
-      <p>{result}</p>
-      <button
-        type="submit"
-        className="h-10 my-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800"
-      >
-        Success
-      </button>
-    </form>
+      {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+      <div className="h-[80vh]">
+        <Switch>
+          <Route exact path="/">
+            {'info'}
+          </Route>
+          <Route path="/add">
+            <AddForm setList={setList} />
+          </Route>
+          <Route path="/edit/:id">
+            <EditForm setList={setList} list={list} />
+          </Route>
+        </Switch>
+      </div>
+    </div>
   );
 };
 
-const EditForm = ({ id }) => {
-  if (!id) {
-    return 'Select a fighter to edit or create a new one';
-  }
-  return <div></div>;
-};
 export default Forms;
