@@ -59,7 +59,7 @@ const updatePosition = (array) => {
 // update object in array at position
 const updateElement = (array, index, element) => {
   let newobj = { ...array[index], ...element };
-  array.splice(index, 0, newobj);
+  array[index] = newobj;
 };
 
 module.exports = {

@@ -14,7 +14,7 @@ const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
       updateList(data).then((res) => {
         setdata(res);
       });
-  }, [data]);
+  }, []);
 
   // get index of draged item
   const onDragStart = (index) => setdragStartIndex(index);
@@ -35,6 +35,9 @@ const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
         dragItem,
         ...list.slice(dropIndex - 1, list.length),
       ]);
+      updateList(data).then((res) => {
+        setdata(res);
+      });
     } else {
       setdata([
         ...list.slice(0, dropIndex),

@@ -60,6 +60,8 @@ app.put('/api/swap', (req, res) => {
 // delete route to remove a fighter from the list
 app.delete('/api/remove/:id', (req, res) => {
   const { id } = req.params;
+  const list = getFile(fileName);
+
   removeElement(list, id);
   let sortedlist = updatePosition(list);
   res.send(sortedlist);
@@ -69,9 +71,12 @@ app.delete('/api/remove/:id', (req, res) => {
 app.put('/api/update/:id', (req, res) => {
   const { position } = req.body;
   const { id } = req.params;
+  const list = getFile(fileName);
+
   updateElement(list, id, req.body);
   swapPositions(list, position, id);
   let sortedlist = updatePosition(list);
+  writeFile(fileName, list);
 
   res.send(sortedlist);
 });

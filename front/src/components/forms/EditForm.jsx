@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { updateFighter, getList } from '../../utils/api';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 const EditForm = ({ setList, list }) => {
   const {
@@ -14,15 +14,29 @@ const EditForm = ({ setList, list }) => {
   const [result, setResult] = useState('');
   const [show, setShow] = useState(false);
   let { id } = useParams();
+  let history = useHistory();
 
   const onSubmit = (data) => {
     setResult(JSON.stringify(data));
     updateFighter(data, id).then((res) => {
-      console.log(res);
-      //getList();
-      //setList(res);
+      setList(res);
+      history.push(`/edit/${data.position}`);
     });
   };
+
+  useEffect(() => {
+    if (list.length > 0) {
+      const { name, image, sherdog, position, ufc_position } = list[id];
+      reset({
+        name,
+        image,
+        sherdog,
+        position,
+        ufc_position,
+      });
+    }
+  }, [id, list]);
+
   if (list.length <= 0) {
     return <div>Loading...</div>;
   }
@@ -100,7 +114,12 @@ const EditForm = ({ setList, list }) => {
           </p>
         </div>
       </div>
-      <button onClick={() => setShow(!show)}>Edit {list[id]?.name}</button>
+      <button
+        className="py-2 bg-blue-600 w-1/2 rounded-md mx-auto mt-5"
+        onClick={() => setShow(!show)}
+      >
+        Edit {list[id]?.name}
+      </button>
       {show && (
         <form
           onSubmit={handleSubmit(onSubmit)}
