@@ -61,9 +61,11 @@ app.put('/api/swap', (req, res) => {
 app.delete('/api/remove/:id', (req, res) => {
   const { id } = req.params;
   const list = getFile(fileName);
-
+  console.log(id);
   removeElement(list, id);
   let sortedlist = updatePosition(list);
+  writeFile(fileName, list);
+
   res.send(sortedlist);
 });
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import DraggableListItem from './DraggableListItem';
 
-import { updateList } from '../../utils/api';
+import { updateList, deleteFighter } from '../../utils/api';
 
 const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
   //const [data, setdata] = useState(props.data);
@@ -47,6 +47,18 @@ const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
     }
   };
 
+  const onDelete = (index) => {
+    console.log(index);
+    let confirmed = window.confirm(
+      'Are you sure you want to delete this item?'
+    );
+    if (confirmed) {
+      deleteFighter(index).then((res) => {
+        setdata(res);
+      });
+    }
+  };
+
   return (
     <ul className="overflow-y-auto w-2/5 h-[90vh]">
       {data.map((item, index) => (
@@ -65,9 +77,12 @@ const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
             >
               Edit {item.name}
             </Link>
-            <span className="p-2 bg-red-500 rounded-md w-1/2 mr-3 text-center">
+            <button
+              onClick={() => onDelete(item.position)}
+              className="p-2 bg-red-500 rounded-md w-1/2 mr-3 text-center"
+            >
               Delete {item.name}
-            </span>
+            </button>
           </div>
         </div>
       ))}

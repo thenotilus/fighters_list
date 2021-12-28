@@ -21,3 +21,7 @@ export const addFighter = (fighter) => {
 export const updateFighter = (fighter, id) => {
   return api.put(`/update/${id}`, fighter).then((res) => res.data);
 };
+
+export const deleteFighter = (id) => {
+  return api.delete(`/remove/${id}`).then((res) => res.data);
+};
