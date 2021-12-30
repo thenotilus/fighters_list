@@ -122,7 +122,7 @@ app.post('/api/upload/json', (req, res) => {
 
   writeFile(fileName, sortedlist);
 
-  res.send(uniqueList);
+  res.send(sortedlist);
 });
 
 // recive a list and write it to the file
