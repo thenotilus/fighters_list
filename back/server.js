@@ -118,7 +118,7 @@ app.post('/api/upload/json', (req, res) => {
       a.findIndex((t) => JSON.stringify(t) === JSON.stringify(v)) === i
   );
 
-  let sortedlist = updatePosition(lisuniqueListt);
+  let sortedlist = updatePosition(uniqueList);
 
   writeFile(fileName, sortedlist);
 
