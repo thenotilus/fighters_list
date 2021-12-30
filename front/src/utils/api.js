@@ -31,42 +31,13 @@ export const deleteFighter = (id) => {
 };
 
 export const downloadJson = async () => {
-  const res = await fetch('http://localhost:5000/api/download/json');
+  const res = await fetch('http://51.15.90.2:5000/api/download/json');
   const blob = await res.blob();
   download(blob, 'fightersList.json');
 };
 
 export const downloadCSV = async () => {
-  const res = await fetch('http://localhost:5000/api/download/csv');
+  const res = await fetch('http://51.15.90.2:5000/api/download/csv');
   const blob = await res.blob();
   download(blob, 'fightersList.csv');
-};
-
-export const callScript = async (toastId) => {
-  axios
-    .request({
-      method: 'get',
-      url: 'http://localhost:5000/api/script',
-      onUploadProgress: (p) => {
-        const progress = p.loaded / p.total;
-
-        // check if we already displayed a toast
-        if (toastId.current === null) {
-          toastId.current = toast('Upload in Progress', {
-            progress: progress,
-          });
-        } else {
-          toast.update(toastId.current, {
-            progress: progress,
-          });
-        }
-      },
-    })
-    .then((res) => {
-      toast.done(toastId.current);
-      return res.data;
-    });
-  // const res = await fetch('http://localhost:5000/api/script').then(
-  //   (res) => res.data
-  // );
 };
