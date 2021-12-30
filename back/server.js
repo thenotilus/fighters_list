@@ -1,18 +1,28 @@
 const express = require('express');
 const cors = require('cors');
+const http = require('http');
+const { Server } = require('socket.io');
+const { watch, stat } = require('fs/promises');
+const updater = require('./updatewithsherdogdata');
+
 const {
   swapPositions,
   removeElement,
   getFile,
   writeFile,
-  sortByPosition,
-  addPos,
   insertElement,
   updatePosition,
   updateElement,
 } = require('./utils');
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+  },
+});
+
 app.use(cors());
 
 app.use(express.json());
@@ -92,6 +102,16 @@ app.get('/api/download/csv', (req, res) => {
   res.download('./fightersList.csv');
 });
 
+app.get('/api/script', (req, res) => {
+  updater((success) => {
+    if (success) {
+      res.send('script done');
+    } else {
+      res.send('script failed');
+    }
+  });
+});
+
 // recive a list and write it to the file
 app.post('/api/upload/json', (req, res) => {
   const { list } = req.body;
@@ -101,6 +121,23 @@ app.post('/api/upload/json', (req, res) => {
   res.send(sortedlist);
 });
 
-app.listen(5000, () => {
+io.on('connection', async (socket) => {
+  let statJSON = await stat(fileName);
+  let statCSV = await stat('./fightersList.csv');
+  socket.emit('time', { mtimeJSON: statJSON.mtime, mtimeCSV: statCSV.mtime });
+  const watcher = watch(fileName, { encoding: 'utf8' });
+  for await (const event of watcher) {
+    if (event.eventType == 'change') {
+      statJSON = await stat(fileName);
+      statCSV = await stat('./fightersList.csv');
+      socket.emit('time', {
+        mtimeJSON: statJSON.mtime,
+        mtimeCSV: statCSV.mtime,
+      });
+    }
+  }
+});
+
+server.listen(5000, () => {
   console.log('Server started on port 5000');
 });

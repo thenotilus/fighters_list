@@ -5,12 +5,18 @@ import Card from './components/card/Card';
 import Forms from './components/forms/Forms';
 import './styles/App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import socketIOClient from 'socket.io-client';
 
 function App() {
   const [list, setList] = useState([]);
+  const [mtime, setMtime] = useState({});
 
   useEffect(() => {
     getList().then((data) => setList(data));
+    const socket = socketIOClient('http://localhost:5000');
+    socket.on('time', (data) => {
+      setMtime(data);
+    });
     //setList(data);
   }, []);
   return (
@@ -31,6 +37,7 @@ function App() {
               Switch={Switch}
               Route={Route}
               list={list}
+              mtime={mtime}
             />
           </div>
         </div>

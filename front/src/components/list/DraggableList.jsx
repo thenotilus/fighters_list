@@ -30,27 +30,31 @@ const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
 
     // update list
     if (dragStartIndex < dropIndex) {
-      setdata([
-        ...list.slice(0, dropIndex - 1),
-        dragItem,
-        ...list.slice(dropIndex - 1, list.length),
-      ]);
+      // setdata([
+      //   ...list.slice(0, dropIndex - 1),
+      //   dragItem,
+      //   ...list.slice(dropIndex - 1, list.length),
+      // ]);
       updateList([
         ...list.slice(0, dropIndex - 1),
         dragItem,
         ...list.slice(dropIndex - 1, list.length),
-      ]);
+      ]).then((res) => {
+        setdata(res);
+      });
     } else {
-      setdata([
-        ...list.slice(0, dropIndex),
-        dragItem,
-        ...list.slice(dropIndex, list.length),
-      ]);
+      // setdata([
+      //   ...list.slice(0, dropIndex),
+      //   dragItem,
+      //   ...list.slice(dropIndex, list.length),
+      // ]);
       updateList([
         ...list.slice(0, dropIndex),
         dragItem,
         ...list.slice(dropIndex, list.length),
-      ]);
+      ]).then((res) => {
+        setdata(res);
+      });
     }
   };
 
@@ -81,13 +85,13 @@ const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
               className="p-2 bg-blue-500 rounded-md w-1/2 mr-3 text-center"
               to={`/edit/${item.position}`}
             >
-              Edit {item.name}
+              Détails {item.name}
             </Link>
             <button
               onClick={() => onDelete(item.position)}
-              className="p-2 bg-red-500 rounded-md w-1/2 mr-3 text-center"
+              className="p-2 bg-red-500 rounded-md w-1/2 mr-3 text-center font-semibold"
             >
-              Delete {item.name}
+              Supprimer {item.name}
             </button>
           </div>
         </div>

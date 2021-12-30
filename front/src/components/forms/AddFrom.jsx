@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { addFighter, getList } from '../../utils/api';
+import { addFighter } from '../../utils/api';
 
 const AddForm = ({ setList }) => {
   const {
@@ -29,7 +29,6 @@ const AddForm = ({ setList }) => {
         </label>
         <input
           {...register('name', { required: true })}
-          placeholder="First name"
           className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
         />
         {errors.name?.type === 'required' && 'Name is required'}
@@ -38,7 +37,6 @@ const AddForm = ({ setList }) => {
         </label>
         <input
           {...register('image', { required: true })}
-          placeholder="Image url"
           className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
         />
         {errors.image?.type === 'required' && 'Image URL is required'}
@@ -47,7 +45,6 @@ const AddForm = ({ setList }) => {
         </label>
         <input
           {...register('sherdog', { required: true })}
-          placeholder="Sherdog url"
           className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
         />
         {errors.sherdog?.type === 'required' && 'Sherdog URL is required'}
@@ -56,7 +53,6 @@ const AddForm = ({ setList }) => {
         </label>
         <input
           {...register('position', { required: true })}
-          placeholder="position"
           type="number"
           className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
         />
@@ -67,7 +63,6 @@ const AddForm = ({ setList }) => {
         </label>
         <input
           {...register('ufc_position')}
-          placeholder="ufc position"
           type="number"
           className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
         />

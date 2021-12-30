@@ -4,7 +4,7 @@ const fs = require('fs');
 const getFile = (filename) => {
   let file = fs.readFileSync(filename, 'utf8');
 
-  return file;
+  return JSON.parse(file);
 };
 
 const addPos = (file) => {

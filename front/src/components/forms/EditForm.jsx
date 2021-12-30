@@ -118,7 +118,7 @@ const EditForm = ({ setList, list }) => {
         className="py-2 bg-blue-600 w-1/2 rounded-md mx-auto mt-5"
         onClick={() => setShow(!show)}
       >
-        Edit {list[id]?.name}
+        Éditer {list[id]?.name}
       </button>
       {show && (
         <form
@@ -130,7 +130,6 @@ const EditForm = ({ setList, list }) => {
           </label>
           <input
             {...register('name', { required: true })}
-            placeholder="First name"
             className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
           />
           {errors.name?.type === 'required' && 'Name is required'}
@@ -139,7 +138,6 @@ const EditForm = ({ setList, list }) => {
           </label>
           <input
             {...register('image', { required: true })}
-            placeholder="Image url"
             className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
           />
           {errors.image?.type === 'required' && 'Image URL is required'}
@@ -148,7 +146,6 @@ const EditForm = ({ setList, list }) => {
           </label>
           <input
             {...register('sherdog', { required: true })}
-            placeholder="Sherdog url"
             className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
           />
           {errors.sherdog?.type === 'required' && 'Sherdog URL is required'}
@@ -157,7 +154,6 @@ const EditForm = ({ setList, list }) => {
           </label>
           <input
             {...register('position', { required: true })}
-            placeholder="position"
             type="number"
             className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
           />
@@ -168,7 +164,6 @@ const EditForm = ({ setList, list }) => {
           </label>
           <input
             {...register('ufc_position')}
-            placeholder="ufc position"
             type="number"
             className="w-full rounded-md text-xl p-2 my-2 placeholder:text-black text-black"
           />
