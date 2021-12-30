@@ -109,14 +109,23 @@ app.get('/api/script', (req, res) => {
   });
 });
 
-// recive a list and write it to the file
+// recive a list, add it at the end of the list and remove duplicates
 app.post('/api/upload/json', (req, res) => {
   const { list } = req.body;
-  let sortedlist = updatePosition(list);
-  writeFile(fileName, list);
-
-  res.send(sortedlist);
+  const newList = [...list, ...getFile(fileName)];
+  const uniqueList = [...new Set(newList)];
+  writeFile(fileName, uniqueList);
+  res.send(uniqueList);
 });
+
+// recive a list and write it to the file
+// app.post('/api/upload/json', (req, res) => {
+//   const { list } = req.body;
+//   let sortedlist = updatePosition(list);
+//   writeFile(fileName, list);
+
+//   res.send(sortedlist);
+// });
 
 io.on('connection', async (socket) => {
   let statJSON = await stat(fileName);
