@@ -120,7 +120,7 @@ app.post('/api/upload/json', (req, res) => {
 
   //let sortedlist = updatePosition(list);
 
-  writeFile(fileName, sortedlist);
+  writeFile(fileName, uniqueList);
 
   res.send(uniqueList);
 });
