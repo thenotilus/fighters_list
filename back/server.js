@@ -113,7 +113,11 @@ app.get('/api/script', (req, res) => {
 app.post('/api/upload/json', (req, res) => {
   const { list } = req.body;
   const newList = [...list, ...getFile(fileName)];
-  const uniqueList = [...new Set(newList)];
+  const uniqueList = newList.filter(
+    (v, i, a) =>
+      a.findIndex((t) => JSON.stringify(t) === JSON.stringify(v)) === i
+  );
+
   writeFile(fileName, uniqueList);
   res.send(uniqueList);
 });
