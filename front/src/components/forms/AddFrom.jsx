@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { addFighter } from '../../utils/api';
 import { toast } from 'react-toastify';
@@ -9,10 +9,8 @@ const AddForm = ({ setList }) => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const [result, setResult] = useState('');
 
   const onSubmit = (data) => {
-    setResult(JSON.stringify(data));
     addFighter(data).then((res) => {
       //getList();
       setList(res);

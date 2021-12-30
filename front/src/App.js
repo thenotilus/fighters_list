@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     getList().then((data) => setList(data));
-    const socket = socketIOClient('http://localhost:5000');
+    const socket = socketIOClient('http://51.15.90.2:5000');
     socket.on('time', (data) => {
       setMtime(data);
     });

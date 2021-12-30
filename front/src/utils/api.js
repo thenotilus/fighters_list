@@ -2,14 +2,16 @@ import axios from 'axios';
 import download from 'downloadjs';
 import { toast } from 'react-toastify';
 
-const url = 'http://localhost:5000/api/';
+const base_url = process.env.REACT_APP_API_URL;
+
+//const url = 'http://localhost:5000/api/';
 
 const api = axios.create({
-  baseURL: url,
+  baseURL: base_url,
 });
 
 export const getList = () => {
-  return api.get('/list').then((res) => res.data);
+  return api.get(base_url + '/list').then((res) => res.data);
 };
 
 export const updateList = (list) => {

@@ -12,13 +12,11 @@ const EditForm = ({ setList, list }) => {
     reset,
   } = useForm();
 
-  const [result, setResult] = useState('');
   const [show, setShow] = useState(false);
   let { id } = useParams();
   let history = useHistory();
 
   const onSubmit = (data) => {
-    setResult(JSON.stringify(data));
     updateFighter(data, id).then((res) => {
       setList(res);
       history.push(`/edit/${data.position}`);

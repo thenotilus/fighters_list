@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AddForm from './AddFrom';
 import EditForm from './EditForm';
-import { downloadJson, downloadCSV, callScript } from '../../utils/api';
+import { downloadJson, downloadCSV } from '../../utils/api';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const Forms = ({ setList, Switch, Route, Link, list, mtime }) => {
-  const [loading, setLoading] = useState(false);
   const toastId = React.useRef(null);
 
   const callScript = async () => {
     const script = axios.request({
       method: 'get',
-      url: 'http://localhost:5000/api/script',
+      url: 'http://51.15.90.2:5000/api/script',
     });
     toast.promise(script, {
       pending: {
