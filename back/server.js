@@ -3,7 +3,7 @@ const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
 const { watch, stat } = require('fs/promises');
-const updater = require('./updatewithsherdogdata');
+const { updater } = require('./updatewithsherdogdata');
 
 const {
   swapPositions,
@@ -70,7 +70,6 @@ app.put('/api/swap', (req, res) => {
 app.delete('/api/remove/:id', (req, res) => {
   const { id } = req.params;
   const list = getFile(fileName);
-  console.log(id);
   removeElement(list, id);
   let sortedlist = updatePosition(list);
   writeFile(fileName, list);
@@ -105,9 +104,7 @@ app.get('/api/download/csv', (req, res) => {
 app.get('/api/script', (req, res) => {
   updater((success) => {
     if (success) {
-      res.send('script done');
-    } else {
-      res.send('script failed');
+      res.send({ msg: 'Fichier mis à jour' });
     }
   });
 });
