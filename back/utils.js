@@ -2,7 +2,8 @@ const fs = require('fs');
 
 // return json file
 const getFile = (filename) => {
-  let file = require(filename);
+  let file = fs.readFileSync(filename, 'utf8');
+
   return file;
 };
 

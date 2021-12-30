@@ -30,7 +30,6 @@ app.get('/api/list', (req, res) => {
 app.post('/api/add', (req, res) => {
   const { position } = req.body;
   const list = getFile(fileName);
-
   const newFighter = {
     ...req.body,
     nickname: '',
@@ -85,7 +84,7 @@ app.put('/api/update/:id', (req, res) => {
 
 // make a route that download the fightersList.json file
 app.get('/api/download/json', (req, res) => {
-  res.download(fileName);
+  res.download('./fightersList.json');
 });
 
 // make a route that download the fightersList.json file

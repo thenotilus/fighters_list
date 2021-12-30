@@ -35,11 +35,18 @@ const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
         dragItem,
         ...list.slice(dropIndex - 1, list.length),
       ]);
-      updateList(data).then((res) => {
-        setdata(res);
-      });
+      updateList([
+        ...list.slice(0, dropIndex - 1),
+        dragItem,
+        ...list.slice(dropIndex - 1, list.length),
+      ]);
     } else {
       setdata([
+        ...list.slice(0, dropIndex),
+        dragItem,
+        ...list.slice(dropIndex, list.length),
+      ]);
+      updateList([
         ...list.slice(0, dropIndex),
         dragItem,
         ...list.slice(dropIndex, list.length),
@@ -48,7 +55,6 @@ const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
   };
 
   const onDelete = (index) => {
-    console.log(index);
     let confirmed = window.confirm(
       'Are you sure you want to delete this item?'
     );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AddForm from './AddFrom';
 import EditForm from './EditForm';
+import { downloadJson, downloadCSV } from '../../utils/api';
 
 const Forms = ({ setList, Switch, Route, Link, list }) => {
   return (
@@ -13,8 +14,18 @@ const Forms = ({ setList, Switch, Route, Link, list }) => {
           <li className="py-2 px-4 bg-green-600 rounded-md">
             <Link to="/add">Ajouter</Link>
           </li>
-          <li className="py-2 px-4 bg-blue-400 rounded-md">Telecharger JSON</li>
-          <li className="py-2 px-4 bg-blue-400 rounded-md">Telecharger CSV</li>
+          <button
+            className="py-2 px-4 bg-blue-400 rounded-md"
+            onClick={() => downloadJson()}
+          >
+            Telecharger JSON
+          </button>
+          <button
+            className="py-2 px-4 bg-blue-400 rounded-md"
+            onClick={() => downloadCSV()}
+          >
+            Telecharger CSV
+          </button>
         </ul>
       </nav>
 
