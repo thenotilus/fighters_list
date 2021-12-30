@@ -6,6 +6,10 @@ import Forms from './components/forms/Forms';
 import './styles/App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
+import { ToastContainer } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
+
+injectStyle();
 
 function App() {
   const [list, setList] = useState([]);
@@ -21,6 +25,18 @@ function App() {
   }, []);
   return (
     <Router>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <main className="font-bold text-center mt-5 w-full h-full text-white">
         <h1 className="mb-10 text-3xl leading-3">fighters_list</h1>
         <div className="flex justify-between items-start">

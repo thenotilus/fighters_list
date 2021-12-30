@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { updateFighter, getList } from '../../utils/api';
+import { updateFighter } from '../../utils/api';
 import { useParams, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const EditForm = ({ setList, list }) => {
   const {
@@ -21,6 +22,15 @@ const EditForm = ({ setList, list }) => {
     updateFighter(data, id).then((res) => {
       setList(res);
       history.push(`/edit/${data.position}`);
+      toast.success('Combatant modifié', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     });
   };
 

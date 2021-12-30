@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { addFighter } from '../../utils/api';
+import { toast } from 'react-toastify';
 
 const AddForm = ({ setList }) => {
   const {
@@ -15,6 +16,15 @@ const AddForm = ({ setList }) => {
     addFighter(data).then((res) => {
       //getList();
       setList(res);
+      toast.success('Combatant ajouté', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     });
   };
 

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import DraggableListItem from './DraggableListItem';
 
 import { updateList, deleteFighter } from '../../utils/api';
+import { toast } from 'react-toastify';
 
 const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
   //const [data, setdata] = useState(props.data);
@@ -65,6 +66,15 @@ const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
     if (confirmed) {
       deleteFighter(index).then((res) => {
         setdata(res);
+        toast.success('Combatant supprimé', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
     }
   };

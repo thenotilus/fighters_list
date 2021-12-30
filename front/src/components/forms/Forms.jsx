@@ -1,20 +1,60 @@
 import React, { useState } from 'react';
 import AddForm from './AddFrom';
 import EditForm from './EditForm';
-import { downloadJson, downloadCSV } from '../../utils/api';
+import { downloadJson, downloadCSV, callScript } from '../../utils/api';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Forms = ({ setList, Switch, Route, Link, list, mtime }) => {
+  const [loading, setLoading] = useState(false);
+  const toastId = React.useRef(null);
+
+  const callScript = async () => {
+    const script = axios.request({
+      method: 'get',
+      url: 'http://localhost:5000/api/script',
+    });
+    toast.promise(script, {
+      pending: {
+        render() {
+          return 'En cours...';
+        },
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      },
+      success: {
+        render() {
+          return 'Fichier mis à jour 👌';
+        },
+        icon: true,
+      },
+      error: 'Erreur 🤯',
+    });
+  };
+
   return (
     <div className="h-full">
       <nav className="mt-5">
         <ul className="flex justify-evenly">
           <li className="py-2 px-4 bg-green-600 rounded-md">
-            <Link to="/">Home</Link>
+            <Link to="/">Accueil</Link>
           </li>
           <li className="py-2 px-4 bg-green-600 rounded-md">
             <Link to="/add">Ajouter</Link>
           </li>
+          <button
+            className="py-2 px-4 bg-green-600 rounded-md"
+            onClick={() => callScript(toastId)}
+          >
+            Mettre à jour le CSV
+          </button>
         </ul>
+        {/* <span>Le fichier a été mis à jour</span> */}
       </nav>
 
       {/* A <Switch> looks through its children <Route>s and
