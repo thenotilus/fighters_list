@@ -10,7 +10,7 @@ li {
 
 .draggable-list__item {
   padding: 10px 0;
-  border-top: 2px solid transparent;
+  border-top: 4px solid transparent;
 }
 
 .draggable-list__item * {
@@ -22,5 +22,5 @@ li {
 }
 
 .draggable-list__item.dragover {
-  border-top-color: green;
+  border-top-color: red;
 }

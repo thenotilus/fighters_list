@@ -27,7 +27,7 @@ const DraggableListItem = (props) => {
   return (
     <li
       ref={itemRef}
-      className="draggable-list__item"
+      className="draggable-list__item mx-2"
       draggable={props.draggable !== undefined ? props.draggable : true}
       onDragStart={onDragStart}
       onDragEnter={onDragEnter}

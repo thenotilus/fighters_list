@@ -80,9 +80,9 @@ const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
   };
 
   return (
-    <ul className="overflow-y-auto w-2/5 h-[90vh]">
+    <ul className="overflow-y-auto bg-gray-300 w-full h-full overflow-x-hidden">
       {data.map((item, index) => (
-        <div key={index}>
+        <div key={index} className="my-2">
           <DraggableListItem
             index={index}
             onDragStart={(index) => onDragStart(index)}
@@ -90,7 +90,7 @@ const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
           >
             {renderItemContent(item)}
           </DraggableListItem>
-          <div className="flex w-full justify-evenly m-0 gap-3">
+          <div className="flex w-full justify-evenly m-0 gap-3 mx-2">
             <Link
               className="p-2 bg-blue-500 rounded-md w-1/2 mr-3 text-center"
               to={`/edit/${item.position}`}

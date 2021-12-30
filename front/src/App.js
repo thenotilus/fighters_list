@@ -23,6 +23,7 @@ function App() {
     });
     //setList(data);
   }, []);
+
   return (
     <Router>
       <ToastContainer
@@ -38,14 +39,21 @@ function App() {
         theme="colored"
       />
       <main className="font-bold text-center mt-5 w-full h-full text-white">
-        <h1 className="mb-10 text-3xl leading-3">fighters_list</h1>
+        <h1 className="mb-10 text-3xl leading-3">
+          Liste des combattants du MMAFACTORY
+        </h1>
         <div className="flex justify-between items-start">
-          <DraggableList
-            data={list}
-            renderItemContent={(item) => LessonCard(item)}
-            setdata={setList}
-            Link={Link}
-          />
+          <div className="w-2/5 h-[85vh]">
+            <p className="my-5 text-lg">
+              Déplacez les combattants pour les réorganiser
+            </p>
+            <DraggableList
+              data={list}
+              renderItemContent={(item) => LessonCard(item)}
+              setdata={setList}
+              Link={Link}
+            />
+          </div>
           <div className="w-[60%] h-[90vh]">
             <Forms
               setList={setList}

@@ -16,13 +16,16 @@ const Card = ({ item }) => {
       </div>
       <div className="flex justify-around w-full">
         <div className="text-left">
-          {item.name ? <p>Name : {item.name}</p> : null}
-          {item.nickname ? <p>Nickname : {item.nickname}</p> : null}
+          {item.name ? <p>{item.name}</p> : null}
+          {item.nickname ? <p className="text-sm">{item.nickname}</p> : null}
           {item.ufc_position ? <p>Position : #{item.ufc_position}</p> : null}
         </div>
         <div className="text-left">
-          {item.Wins ? <p>Wins : {item.Wins}</p> : null}
-          {item.Losses ? <p>Losses : {item.Losses}</p> : null}
+          {item.Wins || item.Losses ? (
+            <p>
+              {item.Wins} - {item.Losses} (wins - losses)
+            </p>
+          ) : null}
         </div>
       </div>
     </div>
