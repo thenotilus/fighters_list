@@ -3,12 +3,12 @@ import { getList } from './utils/api';
 import DraggableList from './components/list/DraggableList';
 import Card from './components/card/Card';
 import Forms from './components/forms/Forms';
+import UpperButtons from './components/buttons/UpperButtons';
 import './styles/App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
 import { ToastContainer } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
-
 injectStyle();
 
 function App() {
@@ -44,9 +44,7 @@ function App() {
         </h1>
         <div className="flex justify-between items-start">
           <div className="w-2/5 h-[85vh]">
-            <p className="my-5 text-lg">
-              Déplacez les combattants pour les réorganiser
-            </p>
+            <UpperButtons />
             <DraggableList
               data={list}
               renderItemContent={(item) => LessonCard(item)}
