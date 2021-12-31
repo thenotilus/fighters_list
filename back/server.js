@@ -110,29 +110,29 @@ app.get('/api/script', (req, res) => {
 });
 
 // recive a list, add it at the end of the list and remove duplicates
-app.post('/api/upload/json', (req, res) => {
-  const { list } = req.body;
-  const newList = [...list, ...getFile(fileName)];
-  const uniqueList = newList.filter(
-    (v, i, a) =>
-      a.findIndex((t) => JSON.stringify(t) === JSON.stringify(v)) === i
-  );
-
-  let sortedlist = updatePosition(uniqueList);
-
-  writeFile(fileName, sortedlist);
-
-  res.send(sortedlist);
-});
-
-// recive a list and write it to the file
 // app.post('/api/upload/json', (req, res) => {
 //   const { list } = req.body;
-//   let sortedlist = updatePosition(list);
-//   writeFile(fileName, list);
+//   const newList = [...list, ...getFile(fileName)];
+//   const uniqueList = newList.filter(
+//     (v, i, a) =>
+//       a.findIndex((t) => JSON.stringify(t) === JSON.stringify(v)) === i
+//   );
+
+//   let sortedlist = updatePosition(uniqueList);
+
+//   writeFile(fileName, sortedlist);
 
 //   res.send(sortedlist);
 // });
+
+//recive a list and write it to the file
+app.post('/api/upload/json', (req, res) => {
+  const { list } = req.body;
+  let sortedlist = updatePosition(list);
+  writeFile(fileName, list);
+
+  res.send(sortedlist);
+});
 
 io.on('connection', async (socket) => {
   let statJSON = await stat(fileName);
