@@ -33,7 +33,7 @@ const swapPositions = (array, a, b) => {
 
 //remove a element from array based on index
 const removeElement = (array, index) => {
-  array.splice(index, 1);
+  array.splice(index - 1, 1);
 };
 
 //write to json file
@@ -46,27 +46,27 @@ const writeFile = (fileName, list) => {
 
 // insert new element to array at position
 const insertElement = (array, index, element) => {
-  array.splice(index, 0, element);
+  array.splice(index - 1, 0, element);
 };
 
 // Update position according to index
 const updatePosition = (array) => {
   return array.map((elem, index) => {
-    elem.position = index;
+    elem.position = index + 1;
     return elem;
   });
 };
 
 // move an element inside the array to a new position
 const moveElement = (array, old_index, new_index) => {
-  const element = array.splice(old_index, 1)[0];
-  array.splice(new_index, 0, element);
+  const element = array.splice(old_index - 1, 1)[0];
+  array.splice(new_index - 1, 0, element);
 };
 
 // update object in array at position
 const updateElement = (array, index, element) => {
-  let newobj = { ...array[index], ...element };
-  array[index] = newobj;
+  let newobj = { ...array[index - 1], ...element };
+  array[index - 1] = newobj;
 };
 
 module.exports = {
