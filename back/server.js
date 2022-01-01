@@ -13,6 +13,7 @@ const {
   insertElement,
   updatePosition,
   updateElement,
+  moveElement,
 } = require('./utils');
 
 const app = express();
@@ -85,6 +86,7 @@ app.put('/api/update/:id', (req, res) => {
 
   updateElement(list, id, req.body);
   //swapPositions(list, position, id);
+  moveElement(list, id, position);
   let sortedlist = updatePosition(list);
   writeFile(fileName, list);
 
