@@ -59,14 +59,14 @@ const updatePosition = (array) => {
 
 // move an element inside the array to a new position
 const moveElement = (array, old_index, new_index) => {
-  const element = array.splice(old_index - 1, 1)[0];
+  const element = array.splice(old_index, 1)[0];
   array.splice(new_index - 1, 0, element);
 };
 
 // update object in array at position
 const updateElement = (array, index, element) => {
-  let newobj = { ...array[index - 1], ...element };
-  array[index - 1] = newobj;
+  let newobj = { ...array[index], ...element };
+  array[index] = newobj;
 };
 
 module.exports = {

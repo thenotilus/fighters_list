@@ -93,7 +93,7 @@ const DraggableList = ({ data, renderItemContent, setdata, Link }) => {
           <div className="flex w-full justify-evenly m-0 gap-3 mx-2">
             <Link
               className="p-2 bg-blue-500 rounded-md w-1/2 mr-3 text-center"
-              to={`/edit/${item.position}`}
+              to={`/edit/${item.position - 1}`}
             >
               Détails {item.name}
             </Link>
