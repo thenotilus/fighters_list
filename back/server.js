@@ -84,7 +84,7 @@ app.put('/api/update/:id', (req, res) => {
   const list = getFile(fileName);
 
   updateElement(list, id, req.body);
-  swapPositions(list, position, id);
+  //swapPositions(list, position, id);
   let sortedlist = updatePosition(list);
   writeFile(fileName, list);
 
