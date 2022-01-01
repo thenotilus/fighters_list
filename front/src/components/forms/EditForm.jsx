@@ -19,7 +19,7 @@ const EditForm = ({ setList, list }) => {
   const onSubmit = (data) => {
     updateFighter(data, id).then((res) => {
       setList(res);
-      history.push(`/edit/${data.position}`);
+      history.push('/');
       toast.success('Combatant modifié', {
         position: 'top-right',
         autoClose: 5000,
@@ -53,82 +53,13 @@ const EditForm = ({ setList, list }) => {
       <h1 className="font-bold text-xl mb-5">
         Formulaire d'Edition du combatant: {list[id]?.name}
       </h1>
-      <div className="text-left ml-5 flex justify-around">
-        <div>
-          <p>
-            position:
-            <span className="text-yellow-400 ml-3">{list[id]?.position}</span>
-          </p>
-          <p>
-            ufc_position:
-            <span className="text-yellow-400 ml-3">
-              {list[id]?.ufc_position}
-            </span>
-          </p>
-          <p>
-            weight_class:
-            <span className="text-yellow-400 ml-3">
-              {list[id]?.weight_class}
-            </span>
-          </p>
-          <p>
-            Wins: <span className="text-yellow-400 ml-3">{list[id]?.Wins}</span>
-          </p>
-          <p>
-            Losses:{' '}
-            <span className="text-yellow-400 ml-3">{list[id]?.Losses}</span>
-          </p>
-          <p>
-            factorien:
-            <span className="text-yellow-400 ml-3">
-              {list[id]?.factorien ? 'true' : 'false'}
-            </span>
-          </p>
-          <p>
-            birthday:
-            <span className="text-yellow-400 ml-3">{list[id]?.birthday}</span>
-          </p>
-        </div>
-        <div>
-          <p>
-            Name: <span className="text-yellow-400 ml-3">{list[id]?.name}</span>
-          </p>
-          <p>
-            Nickname:
-            <span className="text-yellow-400 ml-3">{list[id]?.nickname}</span>
-          </p>
-          <p>
-            Age: <span className="text-yellow-400 ml-3">{list[id]?.age}</span>
-          </p>
-          <p>
-            Height:{' '}
-            <span className="text-yellow-400 ml-3">{list[id]?.height}</span>
-          </p>
-          <p>
-            Weight:{' '}
-            <span className="text-yellow-400 ml-3">{list[id]?.weight}</span>
-          </p>
-          <p>
-            Image:{' '}
-            <span className="text-yellow-400 ml-3 text-xs">
-              {list[id]?.image}
-            </span>
-          </p>
-          <p>
-            sherdog:
-            <span className="text-yellow-400 ml-3 text-xs">
-              {list[id]?.sherdog}
-            </span>
-          </p>
-        </div>
-      </div>
       <button
-        className="py-2 bg-blue-600 w-1/2 rounded-md mx-auto mt-5"
+        className="py-2 bg-blue-600 w-1/2 rounded-md mx-auto mt-5 mb-10"
         onClick={() => setShow(!show)}
       >
-        Éditer {list[id]?.name}
+        {show ? 'Voir les infos ' + list[id]?.name : 'Editer ' + list[id]?.name}
       </button>
-      {show && (
+      {show ? (
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col h-full mx-auto w-2/3"
@@ -182,6 +113,78 @@ const EditForm = ({ setList, list }) => {
             Enrengistrer
           </button>
         </form>
+      ) : (
+        <div className="text-left ml-5 flex justify-around">
+          <div>
+            <p>
+              position:
+              <span className="text-yellow-400 ml-3">{list[id]?.position}</span>
+            </p>
+            <p>
+              ufc_position:
+              <span className="text-yellow-400 ml-3">
+                {list[id]?.ufc_position}
+              </span>
+            </p>
+            <p>
+              weight_class:
+              <span className="text-yellow-400 ml-3">
+                {list[id]?.weight_class}
+              </span>
+            </p>
+            <p>
+              Wins:{' '}
+              <span className="text-yellow-400 ml-3">{list[id]?.Wins}</span>
+            </p>
+            <p>
+              Losses:{' '}
+              <span className="text-yellow-400 ml-3">{list[id]?.Losses}</span>
+            </p>
+            <p>
+              factorien:
+              <span className="text-yellow-400 ml-3">
+                {list[id]?.factorien ? 'true' : 'false'}
+              </span>
+            </p>
+            <p>
+              birthday:
+              <span className="text-yellow-400 ml-3">{list[id]?.birthday}</span>
+            </p>
+          </div>
+          <div>
+            <p>
+              Name:{' '}
+              <span className="text-yellow-400 ml-3">{list[id]?.name}</span>
+            </p>
+            <p>
+              Nickname:
+              <span className="text-yellow-400 ml-3">{list[id]?.nickname}</span>
+            </p>
+            <p>
+              Age: <span className="text-yellow-400 ml-3">{list[id]?.age}</span>
+            </p>
+            <p>
+              Height:{' '}
+              <span className="text-yellow-400 ml-3">{list[id]?.height}</span>
+            </p>
+            <p>
+              Weight:{' '}
+              <span className="text-yellow-400 ml-3">{list[id]?.weight}</span>
+            </p>
+            <p>
+              Image:{' '}
+              <span className="text-yellow-400 ml-3 text-xs">
+                {list[id]?.image}
+              </span>
+            </p>
+            <p>
+              sherdog:
+              <span className="text-yellow-400 ml-3 text-xs">
+                {list[id]?.sherdog}
+              </span>
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );
